@@ -304,6 +304,45 @@ header .hamburger span:after{
   }
 }
 
+/* Bigger, ecommerce-style cards on mobile */
+@media (max-width: 980px) {
+  .scroll-nav-section{
+    padding-top: 8px;
+  }
+
+  .scroll-nav-list{
+    gap:16px;
+    padding:12px 16px 20px;
+  }
+
+  .scroll-nav-item a{
+    /* Big wide cards, one main + a peek of the next */
+    width:50vw;
+    min-width:75vw;
+    height:400px;
+
+    border-radius:24px;
+    box-shadow:0 14px 30px rgba(0,0,0,0.08);
+    font-size:16px;
+
+    /* Slightly larger content spacing */
+    padding:18px 20px;
+  }
+
+  .scroll-nav-item img.bi,
+  .scroll-nav-item svg{
+    width:32px;
+    height:32px;
+    margin-bottom:10px;
+  }
+
+  /* Nice tap feedback */
+  .scroll-nav-item a:active{
+    transform:scale(0.97);
+    box-shadow:0 10px 20px rgba(0,0,0,0.12);
+  }
+}
+
 /* =====================================
    PHILOSOPHY SECTION STYLES
 ===================================== */
@@ -712,11 +751,11 @@ header .hamburger span:after{
     </p>
     
     <div class="ctas">
-      <a class="btn btn-primary" href="https://alundsvagen.github.io/ux/pricing.html">Start Now (Get Pricing)</a>
+      <a class="btn btn-primary" href="https://alundsvagen.github.io/ux/brands.html">See Brand Packs</a>
       <button class="btn btn-outline cta-modal-trigger" 
               data-form-url="https://form.fillout.com/t/wSoN83phHnus"
-              data-title="Send a Message">
-        Get in Touch
+              data-title="Get in touch.">
+        Curious about what we do?
       </button>
     </div>
 
@@ -784,25 +823,6 @@ header .hamburger span:after{
       </a>
     </li>
   </ul>
-</section>
-
-
-    <div class="why-grid">
-      <div class="why-text">
-        <h3>Why buy a ready-made SaaS brand pack?</h3>
-        <p>
-          Design is a skill and it takes time to build it. Rather than hire
-          someone to spend time and money to create a brand you might not like...
-          Now you can buy it, as a standard package. We just got started so we
-          don’t offer a lot of packages yet but we are so excited you are here.
-        </p>
-      </div>
-
-      <div class="why-media">
-        <img src="landing.gif" alt="Demo of ready-made SaaS brand pack applied to a product UI" />
-      </div>
-    </div>
-  </div>
 </section>
 
 <section class="philo-section">
@@ -879,8 +899,8 @@ header .hamburger span:after{
 <div class="sticky-cta-footer">
   <button class="btn btn-primary cta-modal-trigger" 
           data-form-url="https://form.fillout.com/t/wSoN83phHnus"
-          data-title="Send a Message">
-    Contact Us Today
+          data-title="Branding, Design, UX.">
+    Say hello 👋
   </button>
 </div>
 
