@@ -1,5 +1,19 @@
 <!doctype html>
 <html lang="en">
+  <script>
+    (function () {
+      // If you're already on the main index, do nothing
+      if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') return;
+  
+      // Anything wider than 768px = desktop/tablet
+      var isDesktopOrTablet = window.innerWidth > 768;
+  
+      if (isDesktopOrTablet) {
+        window.location.replace('index.html');
+      }
+    })();
+  </script>
+  
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
