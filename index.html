@@ -212,6 +212,98 @@ header .hamburger span:after{
 .why-media img {
   width: 100%; height: auto; display: block; object-fit: cover; border-radius: 12px;
 }
+
+/* =====================================
+   HORIZONTAL SCROLL NAV (New Section)
+===================================== */
+.scroll-nav-section{
+  background:var(--bg);
+  padding:0 0 40px;
+}
+
+/* Horizontal list */
+.scroll-nav-list{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding:8px 16px 12px;   /* matches your .wrap padding on mobile */
+  margin:0;
+  list-style:none;
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:16px; /* keeps first/last card nicely aligned */
+}
+
+/* Hide native scrollbar on WebKit */
+.scroll-nav-list::-webkit-scrollbar{
+  display:none;
+}
+
+/* Card styles */
+.scroll-nav-item a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:110px;
+  min-width:110px;
+  height:110px;
+  background:#fff;
+  border:1px solid #E1E4E6;
+  border-radius:18px;
+  text-align:center;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:var(--text);
+  transition:all .2s ease;
+  scroll-snap-align:start;
+  box-shadow:0 4px 10px rgba(0,0,0,0.03);
+}
+
+/* Hover/active state */
+.scroll-nav-item a:hover,
+.scroll-nav-item a:focus-visible,
+.scroll-nav-item a.is-active{
+  border-color:var(--blue);
+  background:var(--blue);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(60,117,246,0.35);
+}
+
+/* Icons reused from desktop nav */
+.scroll-nav-item img.bi,
+.scroll-nav-item svg{
+  width:24px;
+  height:24px;
+  margin-bottom:6px;
+  color:var(--menuIcon);
+  filter:grayscale(1) brightness(.55);
+  transition:inherit;
+}
+
+.scroll-nav-item a:hover img.bi,
+.scroll-nav-item a:hover svg,
+.scroll-nav-item a.is-active img.bi,
+.scroll-nav-item a.is-active svg{
+  filter:none;
+  color:#fff;
+}
+
+/* Desktop: keep layout tidy, no horizontal scroll */
+@media (min-width: 981px) {
+  .scroll-nav-section{
+    padding-bottom:60px;
+  }
+  .scroll-nav-list{
+    max-width:1200px;
+    margin-inline:auto;
+    padding-inline:0;
+    justify-content:center;
+    overflow-x:hidden;
+  }
+}
+
 /* =====================================
    PHILOSOPHY SECTION STYLES
 ===================================== */
@@ -634,18 +726,66 @@ header .hamburger span:after{
   </div>
 </section>
 
-<section class="why-section">
-  <div class="wrap">
+<section class="scroll-nav-section">
+  <ul class="scroll-nav-list">
+    <!-- Product: Brands (same icon as desktop dropdown) -->
+    <li class="scroll-nav-item">
+      <a href="https://alundsvagen.github.io/ux/brands.html">
+        <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/cart3.svg" alt="">
+        Brands
+      </a>
+    </li>
 
-    <div class="why-stat-group">
-      <h2 class="why-stat">+14 SaaS & tech design consulting clients</h2>
-      <div class="why-proof">
-        <img src="Monitum.png" alt="Monitum logo" />
-        <img src="Dolago.png" alt="Dolago logo" />
-        <img src="Zwaapr.png" alt="Zwaapr logo" />
-        <img src="Brainwave.png" alt="Brainwave logo" />
-      </div>
-    </div>
+    <!-- Product: UX packs (same icon as desktop dropdown) -->
+    <li class="scroll-nav-item">
+      <a href="https://alundsvagen.github.io/ux/ux.html">
+        <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/box-seam.svg" alt="">
+        UX Packs
+      </a>
+    </li>
+
+    <!-- Philosophy: Services (same icon as desktop dropdown) -->
+    <li class="scroll-nav-item">
+      <a href="https://alundsvagen.github.io/ux/services.html">
+        <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/back.svg" alt="">
+        Services
+      </a>
+    </li>
+
+    <!-- Philosophy: About (same icon as desktop dropdown) -->
+    <li class="scroll-nav-item">
+      <a href="https://alundsvagen.github.io/ux/About.html">
+        <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/asterisk.svg" alt="">
+        About
+      </a>
+    </li>
+
+    <!-- Philosophy: Meditate (same icon as desktop dropdown) -->
+    <li class="scroll-nav-item">
+      <a href="https://alundsvagen.github.io/ux/meditate.html">
+        <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/brilliance.svg" alt="">
+        Meditate
+      </a>
+    </li>
+
+    <!-- Custom (new icon but same bootstrap set) -->
+    <li class="scroll-nav-item">
+      <a href="https://alundsvagen.github.io/ux/custom.html">
+        <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/wrench-adjustable.svg" alt="">
+        Custom
+      </a>
+    </li>
+
+    <!-- Pricing (new icon but same bootstrap set) -->
+    <li class="scroll-nav-item">
+      <a href="https://alundsvagen.github.io/ux/pricing.html">
+        <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/coin.svg" alt="">
+        Pricing
+      </a>
+    </li>
+  </ul>
+</section>
+
 
     <div class="why-grid">
       <div class="why-text">
