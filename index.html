@@ -214,6 +214,37 @@ header .hamburger span:after{
 }
 
 /* =====================================
+   HERO & CTA ANIMATIONS
+===================================== */
+
+/* Fade + rise for hero heading & body */
+.hero h1 {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: heroFadeUp 0.7s ease-out forwards;
+  animation-delay: 0.05s;
+}
+
+.hero p {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: heroFadeUp 0.7s ease-out forwards;
+  animation-delay: 0.25s;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================
    HORIZONTAL SCROLL NAV (New Section)
 ===================================== */
 .scroll-nav-section{
@@ -601,7 +632,7 @@ header .hamburger span:after{
   }
 
   /* Hero Desktop */
-  .hero{ padding:60px 0 80px }
+  .hero{ padding:120px 0 80px }
   .hero h1{ text-align:center; max-width:1061px; margin-inline:auto; font-size:100px; }
   .hero p{ text-align:center; max-width:1020px; margin-inline:auto; font-size:30px; }
   .ctas{ flex-direction:row; justify-content:center; max-width:none; }
@@ -638,6 +669,72 @@ header .hamburger span:after{
   .brandkits-card p{ max-width:366px; margin-inline:auto; }
   .pill{ font-size:30px; min-width:172px; height:61px; border-radius:30.5px; }
 }
+
+/* Shiny sweep on primary CTA */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.75) 35%,
+    transparent 70%
+  );
+  transform: translateX(-130%);
+  animation: btnShineSweep 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes btnShineSweep {
+  to {
+    transform: translateX(130%);
+  }
+}
+
+/* Subtle rise-in for secondary CTA */
+.btn-rise {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: heroFadeUp 0.7s ease-out forwards;
+  animation-delay: 0.45s; /* comes in after the heading + first button */
+}
+
+/* Floating cards in horizontal scroll */
+.scroll-nav-item a {
+  animation: floatCard 5s ease-in-out infinite;
+}
+
+.scroll-nav-item:nth-child(2) a { animation-delay: 0.4s; }
+.scroll-nav-item:nth-child(3) a { animation-delay: 0.8s; }
+.scroll-nav-item:nth-child(4) a { animation-delay: 1.2s; }
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* Moving gradient for bottom CTA */
+.footer-gradient-cta {
+  background: var(--gradient);
+  background-size: 220% 220%;
+  border: none;
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+  animation: gradientShift 5s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 </style>
 </head>
 <body>
@@ -751,11 +848,13 @@ header .hamburger span:after{
     </p>
     
     <div class="ctas">
-      <a class="btn btn-primary" href="https://alundsvagen.github.io/ux/brands.html">See Brand Packs</a>
-      <button class="btn btn-outline cta-modal-trigger" 
-              data-form-url="https://form.fillout.com/t/wSoN83phHnus"
-              data-title="Get in touch.">
-        Curious about what we do?
+      <a class="btn btn-primary btn-shine" href="https://alundsvagen.github.io/ux/brands.html">
+        See Brand Packs
+      </a>
+      <button class="btn btn-outline btn-rise cta-modal-trigger" 
+      data-form-url="https://form.fillout.com/t/wSoN83phHnus"
+      data-title="Get in touch.">
+      Curious about what we do?
       </button>
     </div>
 
@@ -864,7 +963,6 @@ header .hamburger span:after{
           <div class="bk-ring bk-outer"></div>
           <div class="bk-ring bk-middle"></div>
           <div class="bk-ring bk-inner"></div>
-          <div class="bk-text">take away<br>studio</div>
         </div>
       </div>
 
@@ -897,7 +995,7 @@ header .hamburger span:after{
 </section>
 
 <div class="sticky-cta-footer">
-  <button class="btn btn-primary cta-modal-trigger" 
+  <button class="btn btn-primary footer-gradient-cta btn-shine cta-modal-trigger" 
           data-form-url="https://form.fillout.com/t/wSoN83phHnus"
           data-title="Branding, Design, UX.">
     Say hello 👋
