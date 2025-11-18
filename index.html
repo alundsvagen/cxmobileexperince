@@ -27,14 +27,14 @@
 
 <style>
 /* ------------------------------------
-   Take Away Studio — Mobile-First Stylesheet
+   Take Away Studio — Mobile-First Stylesheet (Conversion Focused)
 ------------------------------------- */
 
 /* ========== VARIABLES & BASE ========== */
 :root{
-  --bg: #F9F9F9; /* Much lighter background */
+  --bg: #F9F9F9; /* Lighter background */
   --text:#000;
-  --muted:#6A6B70; /* Slightly darker muted text for contrast */
+  --muted:#6A6B70;
   --blue:#3C75F6;
   --brand:#D28137;
   --gradient: linear-gradient(90deg, #3C75F6 0%, #D35224 100%);
@@ -48,6 +48,7 @@ body{
   color:var(--text);
   font:400 17px/1.4 "Helvetica", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  padding-bottom: 70px; /* Space for the sticky footer CTA on mobile */
 }
 a{ color:inherit; text-decoration:none }
 .wrap{ width:100%; margin-inline:auto; position:relative; padding-inline:16px }
@@ -60,14 +61,11 @@ header{
   display:flex; align-items:center; justify-content:space-between;
   padding:14px 0; gap:12px;
 }
-
-/* Logo */
 header .logo{
   font:700 28px/1 "Bricolage Grotesque", system-ui, sans-serif;
   letter-spacing:-.04em;
 }
-
-/* Mobile Hamburger */
+header .nav-bar, header .btn-contact{ display:none; } /* Hidden on mobile */
 header .hamburger{
   display:flex; width:44px; height:44px; border-radius:12px; background:#E1E4E6;
   align-items:center; justify-content:center; border:none; padding:0; cursor:pointer;
@@ -81,87 +79,69 @@ header .hamburger span:after{
   transform:translateY(-50%); background:#000;
 }
 
-/* Desktop nav (hidden on mobile, kept for desktop merge later) */
-header .nav-bar, header .btn-contact{ display:none; }
-
 /* Mobile Menu Panel */
 .panel{
   display:none; position:fixed; inset:0; background:#fff; z-index:300;
-  padding:24px 18px 32px; overflow:auto;
+  padding:18px 18px 32px; overflow:auto;
 }
 .panel.open{ display:block }
-.panel .close{ 
-  position:absolute; right:16px; top:16px; font-size:36px; color:#000;
-  border:none; background:none; cursor:pointer; padding:4px 8px;
-}
-.panel h4{ margin:30px 0 10px; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:#666; font-weight:700;}
-.panel a{ display:flex; align-items:center; gap:10px; padding:14px 10px; border-radius:12px; font-size:20px; font-weight:500; }
+.panel .close{ position:absolute; right:16px; top:12px; font-size:26px; color:#000; background:none; border:none; cursor:pointer; }
+.panel h4{ margin:18px 0 8px; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:#666; }
+.panel a{ display:flex; align-items:center; gap:10px; padding:12px 10px; border-radius:10px; font-size:18px; }
 .panel a:hover{ background:#F3F3F3; }
 .panel .panel-logo{
   margin:4px 0 14px 2px;
   font:700 26px/1 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing:-.04em;
 }
+.panel .panel-logo a:hover{ color:var(--brand) }
 
 /* =====================================
-   HERO (Mobile Left-Aligned)
+   HERO (Mobile Left-Aligned & Permanent Gradient)
 ===================================== */
 .hero{ position:relative; padding:16px 0 40px }
 .hero h1{
-  margin:28px 0 0; /* Left-align & reduced top margin */
+  margin:28px 0 0; 
   font-weight:700; font-size:clamp(44px, 11vw, 84px); line-height:1.05;
-  text-align:left; /* Left-aligned */
+  text-align:left;
   letter-spacing:-.03em;
-  /* Permanent Gradient */
+  /* Permanent Gradient Style */
   background: var(--gradient);
   -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent; color:transparent;
-  transition:none; /* Disable hover effect */
+  transition:none;
 }
-.hero h1:hover{ background: var(--gradient); } /* Ensure gradient remains on hover */
-
 .hero p{
   max-width:100%; margin:16px 0 0; text-align:left; color:var(--muted);
   font-size:clamp(18px, 4vw, 24px); line-height:1.4; letter-spacing:-.03em;
 }
-
-/* New CTAs - larger tap targets, clearer hierarchy */
+/* CTAs - optimized for conversion */
 .ctas{ display:flex; flex-direction:column; gap:16px; justify-content:flex-start; margin:32px 0 40px }
 .btn{ 
   height:56px; display:grid; place-items:center; border-radius:12px; 
   letter-spacing:-.03em; font-size:18px; font-weight:700; width:100%; max-width:350px;
   cursor:pointer; transition:background .2s, border .2s;
 }
-.btn-primary{ 
+.btn-primary{ /* Main goal: Pricing page */
   background:var(--blue); color:#fff; border:none; 
   box-shadow: 0 4px 12px rgba(60, 117, 246, 0.4);
 }
-.btn-primary:hover{ background:var(--blue); }
-
-.btn-outline{ 
-  border:2px solid var(--muted); background:transparent; color:var(--text);
-  box-shadow: none;
+.btn-outline{ /* Secondary goal: Contact modal */
+  border:2px solid var(--brand); 
+  background:transparent; color:var(--brand);
 }
 .btn-outline:hover{ 
-  border-color:var(--text); background:rgba(0,0,0,0.03); 
+  border-color:var(--brand); background:rgba(210, 129, 55, 0.1); 
 }
-
 .media-wrap {
-  display: flex;
-  justify-content: center;
-  padding: 16px 0 40px;
+  display: flex; justify-content: center; padding: 16px 0 40px;
 }
-
 .media {
-  width: 100%;
-  border-radius: 12px;
-  display: block;
-  height: auto;
-  object-fit: cover;
+  width: 100%; border-radius: 12px; display: block; height: auto; object-fit: cover;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 /* =====================================
-   WHY BUY A READY-MADE DESIGN
+   WHY BUY A READY-MADE DESIGN (Marquee Fix)
 ===================================== */
 .why-section{ background:#fff; padding:60px 0; display:flex; justify-content:center; }
 .why-section .wrap{ width:100%; margin-inline:auto; padding-inline:16px; }
@@ -170,10 +150,10 @@ header .nav-bar, header .btn-contact{ display:none; }
 .why-stat{
   font-family:'Bricolage Grotesque', sans-serif; font-weight:700;
   font-size:clamp(28px, 7vw, 50px); line-height:1.2; letter-spacing:-.04em; color:#000; 
-  margin:0 0 8px; /* Removed weird space */
+  margin:0 0 8px;
 }
 
-/* Marquee for Logos */
+/* MARQUEE STYLES */
 .why-proof{ 
   overflow:hidden; white-space:nowrap; 
   background: #F0F0F0; border-radius: 8px; padding: 10px 0;
@@ -181,169 +161,456 @@ header .nav-bar, header .btn-contact{ display:none; }
 }
 .marquee-content{
   display:inline-block;
-  animation: scroll-logos 30s linear infinite;
-  padding-right: 20px; /* Separator space */
+  animation: scroll-logos 18s linear infinite; 
+  padding-right: 40px; 
 }
 .why-proof img{
-  height: 40px; /* Fixed height for small mobile logos */
+  height: 40px; 
   width: auto;
-  margin: 0 40px; /* Space between logos */
+  margin: 0 20px; 
   display:inline-block;
   opacity: 0.7;
+  max-width: 150px; 
 }
-
 @keyframes scroll-logos {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); } /* Scrolls the duplicated content */
+  to { transform: translateX(-100%); } 
 }
-
 
 .why-grid{
-  display:grid; grid-template-columns:1fr; /* Stacked for mobile */
-  align-items:start; gap:40px;
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:start;
+  gap:40px;
+  padding-top: 40px;
 }
 .why-text h3{
-  font-weight:700; font-size:clamp(32px, 8vw, 60px); line-height:1.04; letter-spacing:-.03em; color:#000; margin:0 0 20px;
+  font-weight:700; font-size:clamp(36px,5vw,100px); line-height:1.04; letter-spacing:-.03em; color:#000; margin:0 0 20px;
 }
 .why-text p{
-  font-weight:400; font-size:clamp(16px, 4vw, 20px); line-height:1.4; letter-spacing:-.03em; color:var(--muted); max-width:none;
-}
-.why-media {
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden; 
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  font-weight:400; font-size:clamp(16px,2vw,30px); line-height:1.4; letter-spacing:-.03em; color:var(--muted); max-width:500px;
 }
 .why-media img {
-  width: 100%;
-  height: auto; 
-  display: block;
+  width: 100%; height: auto; display: block; object-fit: cover; border-radius: 12px;
+}
+/* =====================================
+   PHILOSOPHY SECTION STYLES
+===================================== */
+.philo-section{ background:#F3F3F3; padding:60px 0; }
+.philo-top{ margin-bottom:40px; text-align:left; }
+.philo-chip-outline{ 
+  display:inline-block; border:1px solid var(--text); padding:4px 12px; border-radius:20px;
+  font-size:14px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  margin-bottom:12px;
+}
+.philo-title{ 
+  font-weight:700; font-size:clamp(32px, 8vw, 60px); line-height:1.1; letter-spacing:-.04em; margin:0;
+}
+.philo-grid{
+  display:grid; grid-template-columns:1fr; gap:24px;
+}
+.philo-card{
+  display:block; border-radius:16px; overflow:hidden; position:relative;
+  min-height:280px;
+  background:#000;
+}
+.philo-img{ width:100%; height:100%; object-fit:cover; display:block; opacity:.8; transition:opacity .3s ease; }
+.philo-card:hover .philo-img{ opacity:.5; }
+.philo-caption{
+  position:absolute; bottom:0; left:0; right:0; padding:16px;
+  color:#fff;
+  background:linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+}
+.philo-caption h3{ font-weight:700; font-size:clamp(24px, 5vw, 40px); line-height:1.1; letter-spacing:-.03em; margin:0; }
+.philo-chip{
+  position:absolute; top:16px; right:16px;
+  display:inline-block; padding:6px 14px; border-radius:20px;
+  background:rgba(255,255,255,0.9); color:var(--text); font-weight:700; font-size:14px;
 }
 
-/* Desktop layout: Restore original grid and display properties */
+/* ===================== KITS SECTION (white bg) ===================== */
+.brandkits-section{
+  background:#fff;
+  padding:60px 0 100px;
+  overflow:hidden;
+}
+.brandkits-top{
+  display:block; 
+  text-align: center;
+  margin:0 auto 40px;
+}
+.brandkits-logo-frame{ display:flex; justify-content:center; margin-bottom:20px; }
+.brandkits-header h2{
+  font-weight:700;
+  font-size:clamp(36px,9vw,60px);
+  line-height:1.04;
+  letter-spacing:-.03em;
+  color:#000;
+  margin:0 0 10px;
+}
+.brandkits-header p{
+  font-weight:400;
+  font-size:clamp(16px,4vw,24px);
+  color:var(--muted);
+  margin:0;
+}
+/* Animated logo (mobile adjustment) */
+.bk-logo{ width:clamp(150px, 30vw, 440px); }
+.bk-text{ font-size:clamp(20px, 4vw, 70px); }
+
+/* Cards (white) */
+.brandkits-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:24px;
+  margin:24px auto 0;
+}
+.brandkits-card{
+  box-sizing:border-box;
+  width:100%;
+  border:2px solid #E1E4E6;
+  border-radius:30px;
+  padding:32px;
+  transition:all .25s ease;
+  text-align: left;
+}
+.brandkits-card:hover{
+  background:#F7F3ED; border-color:#E1E4E6; box-shadow:5px 5px 2px 5px rgba(0,0,0,0.05);
+}
+.pill{
+  display:inline-grid; place-items:center; min-width:120px; height:40px; padding:0 14px;
+  background:#DBF5FC; border-radius:20px; font-size:16px; color:#000; font-weight:700;
+}
+.pill-wide{ min-width:160px; }
+.brandkits-card h3{
+  margin:20px 0 8px; font-weight:700; font-size:clamp(24px,5vw,50px); line-height:1.04; letter-spacing:-.03em;
+}
+.brandkits-card p{
+  margin:0 auto 0; font-weight:400; font-size:clamp(15px,3vw,30px); color:var(--muted); letter-spacing:-.03em;
+}
+
+/* =====================================
+   STICKY FOOTER CTA (Mobile Conversion Boost)
+===================================== */
+@media (max-width: 980px) {
+  .sticky-cta-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 250;
+    padding: 12px 16px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+  }
+  .sticky-cta-footer .btn {
+    width: 100%;
+    margin: 0;
+  }
+}
+/* =====================================
+   MODAL STYLES (REQUIRED FOR FUNCTIONALITY)
+===================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 24px;
+  max-width: 90vw;
+  width: 700px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.is-open .modal-content {
+  transform: translateY(0);
+}
+
+.modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: 300;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  z-index: 10;
+}
+
+/* Mobile fullscreen modal */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 100vw;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  .modal-body {
+    padding: 16px;
+  }
+}
+/* =====================================
+   DESKTOP OVERRIDES
+===================================== */
 @media (min-width:981px){
+  .wrap{ max-width:1728px; padding-inline:24px; }
   header{
     display:grid;
-    grid-template-columns:auto 1fr auto;
-    column-gap:32px; padding:28px 24px;
+    grid-template-columns:auto 1fr auto; 
+    align-items:center; column-gap:32px; padding:28px 0;
     position:sticky; top:0;
   }
   header .logo{ margin-left:16px; }
-  header .nav-bar, header .btn-contact{ display:flex; }
   header .nav-bar{
+    display:flex !important; align-items:center; gap:72px;
+    justify-self:center;
+    font:400 20px/1.04 "Helvetica", Arial, sans-serif;
+    letter-spacing:-.03em;
     list-style:none; margin:0; padding:0;
-    align-items:center; gap:72px; justify-self:center;
-    font:400 20px/1.04 "Helvetica", Arial, sans-serif; letter-spacing:-.03em;
   }
   header .hamburger{ display:none !important; }
   header .btn-contact{ 
+    display:grid !important;
     height:47px; min-width:151px; padding:0 18px;
     border:1px solid #000; border-radius:10px; background:#000; color:#fff;
-    place-items:center; font-weight:700; letter-spacing:-.03em; justify-self:end;
+    place-items:center; font-weight:700; letter-spacing:-.03em;
+    justify-self:end; 
   }
   header .btn-contact:hover{ background:var(--blue); border-color:var(--blue) }
-  
-  .hero h1{ text-align:center; font-size:100px; margin:22px auto 0; }
-  .hero p{ text-align:center; margin:24px auto 0; }
-  .ctas{ flex-direction:row; margin:28px auto 40px; }
-  .btn{ width:151px; }
-  .why-grid{ grid-template-columns:repeat(auto-fit, minmax(400px,1fr)); gap:60px; }
+  .sticky-cta-footer { display: none !important; }
+
+  /* Desktop dropdown nav (retained from original) */
+  header .nav-bar > li{ position:relative }
+  header .nav-link{ display:inline-flex; align-items:center; gap:8px; }
+  header .nav-link .caret{
+    width:0; height:0; display:inline-block;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    border-top:8px solid var(--text);
+    transform:translateY(2px);
+  }
+  header .menu{
+    position:absolute; left:50%; top:calc(100% + 14px);
+    transform:translateX(-50%);
+    display:none; min-width:320px; background:#fff;
+    border:2px solid #000; border-radius:24px; padding:14px;
+    box-shadow:0 24px 60px rgba(0,0,0,.18), 0 0 40px rgba(0,0,0,.06);
+    z-index:1000;
+  }
+  header .menu.open{ display:block; }
+  header .menu::before{
+    content:""; position:absolute; inset:-30px -40px -40px -40px;
+    background:radial-gradient(60% 60% at 50% 0%, rgba(0,0,0,.08), transparent 60%);
+    border-radius:36px; z-index:-1;
+  }
+  header .menu a{
+    display:flex; align-items:center; gap:12px;
+    padding:14px; border-radius:14px; font-size:20px; letter-spacing:-.03em;
+  }
+  header .menu a:hover{ background:#F3F3F3; }
+  header .menu a.is-heading{ background:#F3F3F3; font-weight:700; border-radius:16px; }
+  header .menu svg,
+  header .menu img.bi{
+    width:20px; height:20px; color:#888; filter:grayscale(1) brightness(.55);
+    flex:0 0 20px;
+  }
+  header .menu .icon-chip{
+    display:inline-grid; place-items:center;
+    width:28px; height:28px; border-radius:8px;
+    border:2px solid #CFCFCF; background:#fff; color:#888; flex:0 0 28px;
+  }
+
+  /* Hero Desktop */
+  .hero{ padding:60px 0 80px }
+  .hero h1{ text-align:center; max-width:1061px; margin-inline:auto; font-size:100px; }
+  .hero p{ text-align:center; max-width:1020px; margin-inline:auto; font-size:30px; }
+  .ctas{ flex-direction:row; justify-content:center; max-width:none; }
+  .btn{ width:151px; max-width:none; height:47px; }
+  .btn-primary{ width:128px; }
+
+  /* Why Section Desktop */
+  .why-section{ padding:120px 0; }
   .why-stat-group{ text-align:center; margin-bottom:100px; }
   .why-stat{ font-size:80px; }
-  .why-proof{ background:transparent; padding:0; box-shadow:none; }
-  .why-proof img{ height:auto; max-width:1436px; opacity:1; }
-  .marquee-content{ animation: none; padding-right:0; display:block; }
-}
+  .why-proof img{ height:auto; max-width:1436px; display:block; margin-inline:auto; opacity:1; }
+  .why-grid{ grid-template-columns:repeat(2, minmax(400px,1fr)); gap:60px; }
+  .why-text h3{ text-align:left; } .why-text p{ text-align:left; margin-inline:0; }
+  .why-media{ border-radius:12px; }
 
-/* Original dropdown and modal styles are omitted for brevity but remain functional */
+  /* Philosophy Section Desktop */
+  .philo-section{ padding:120px 0; }
+  .philo-top{ text-align:center; }
+  .philo-title{ font-size:80px; max-width:1000px; margin-inline:auto; }
+  .philo-grid{ grid-template-columns:repeat(3, 1fr); gap:36px; }
+
+  /* Kits Section Desktop */
+  .brandkits-section{ padding:120px 0 160px; }
+  .brandkits-top{ display:grid; grid-template-columns: minmax(220px, 440px) 1fr; gap:48px; max-width:1400px; text-align:left; margin-bottom:48px; }
+  .brandkits-logo-frame{ justify-content:flex-start; }
+  .brandkits-header h2{ font-size:100px; margin:0 0 14px; }
+  .brandkits-header p{ font-size:30px; }
+  .bk-logo{ width:clamp(200px, 26vw, 440px); }
+  .bk-text{ font-size:clamp(28px, 4vw, 70px); }
+  .brandkits-card{ padding:40px 36px 42px; border-radius:45px; text-align:center; }
+  .brandkits-card p{ max-width:366px; margin-inline:auto; }
+  .pill{ font-size:30px; min-width:172px; height:61px; border-radius:30.5px; }
+}
 </style>
 </head>
 <body>
 
-  <div class="modal-overlay" id="cta-modal-overlay" aria-hidden="true">
+<div class="modal-overlay" id="cta-modal-overlay" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" aria-label="Close dialog" id="modal-close-btn">×</button>
+    <div class="modal-body">
+      <h2 id="modal-title" style="margin-top: 0;">Loading Form...</h2>
+      <iframe id="modal-iframe" src="" frameborder="0" style="width: 100%; height: 600px; border: none;" allow="clipboard-write"></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="logo">
+      <a href="/">take away<br/>studio</a>
     </div>
   
-  <script>
-    // MODAL SCRIPT FOR CTAS (assume retained)
-    document.addEventListener('DOMContentLoaded', () => {
-      // ... modal logic ...
-    });
+    <ul class="nav-bar" aria-label="Main">
+      <li>
+        <a href="https://alundsvagen.github.io/ux/brands.html" class="nav-link" data-dd="product">
+          Product <span class="caret" aria-hidden="true"></span>
+        </a>
+        <div class="menu" id="dd-product" role="menu" aria-label="Product submenu">
+          <a href="https://alundsvagen.github.io/ux/brands.html">
+            <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/cart3.svg" alt="">
+            Brands
+          </a>
+          <a href="https://alundsvagen.github.io/ux/ux.html">
+            <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/box-seam.svg" alt="">
+            UX packs
+          </a>
+        </div>          
+      </li>
   
-    // Mobile nav script 
-    const openPanel = document.getElementById('openPanel');
-    const closePanel = document.getElementById('closePanel');
-    const panel = document.getElementById('panel');
-    openPanel?.addEventListener('click', ()=> panel?.classList.add('open'));
-    closePanel?.addEventListener('click', (e)=>{
-      e.preventDefault();
-      panel?.classList.remove('open');
-    });
-  </script>
+      <li>
+        <a href="https://alundsvagen.github.io/ux/philosophy.html" class="nav-link" data-dd="philosophy">
+          Philosophy <span class="caret" aria-hidden="true"></span>
+        </a>
+        <div class="menu" id="dd-philosophy" role="menu" aria-label="Philosophy submenu">
+          <a href="https://alundsvagen.github.io/ux/About.html" class="is-heading">
+            <span class="icon-chip">
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                <path d="M10.5 5.5L6 10h3v1H5v-4h1v3l4.5-4.5z"/>
+              </svg>
+            </span>
+            Philosophy
+          </a>
+          <a href="https://alundsvagen.github.io/ux/About.html">
+            <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/asterisk.svg" alt="">
+            About
+          </a>
+          <a href="https://alundsvagen.github.io/ux/services.html">
+            <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/back.svg" alt="">
+            Services
+          </a>
+          <a href="https://alundsvagen.github.io/ux/meditate.html">
+            <img class="bi" src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/brilliance.svg" alt="">
+            Mediate
+          </a>
+        </div>          
+      </li>
+  
+      <li><a class="nav-link" href="https://alundsvagen.github.io/ux/custom.html">Custom</a></li>
+      <li><a class="nav-link" href="https://alundsvagen.github.io/ux/pricing.html">Pricing</a></li>
+    </ul>
+  
+    <a class="btn-contact cta-modal-trigger" 
+    href="#" 
+    data-form-url="https://form.fillout.com/t/wSoN83phHnus"
+    data-title="Contact Us">
+    Contact
+    </a>      
+    <button class="hamburger" id="openPanel" aria-label="Open menu"><span></span></button>
+  </header>
+</div> <nav class="panel" id="panel" aria-label="Mobile">
+  <button class="close" id="closePanel" aria-label="Close">×</button>
+  <div class="panel-logo"><a href="/">take away<br/>studio</a></div>
 
+  <h4>Product</h4>
+  <a href="https://alundsvagen.github.io/ux/brands.html">Brands</a>
+  <a href="https://alundsvagen.github.io/ux/ux.html">UX packs</a>
+
+  <h4>Philosophy</h4>
+  <a href="https://alundsvagen.github.io/ux/philosophy.html">Philosophy</a>
+  <a href="https://alundsvagen.github.io/ux/About.html">About</a>
+  <a href="https://alundsvagen.github.io/ux/services.html">Services</a>
+  <a href="https://alundsvagen.github.io/ux/meditate.html">Mediate</a>
+
+  <h4>Other</h4>
+  <a href="https://alundsvagen.github.io/ux/custom.html">Custom</a>
+  <a href="https://alundsvagen.github.io/ux/pricing.html">Pricing</a>
+  <a href="#" class="cta-modal-trigger"
+  data-form-url="https://form.fillout.com/t/wSoN83phHnus"
+  data-title="Contact Us"
+  style="background: var(--blue); color: white; margin-top: 15px;">
+ Contact Us
+</a>
+</nav>
+
+<section class="hero">
   <div class="wrap">
-    <header>
-      <div class="logo">
-        <a href="/">take away<br/>studio</a>
-      </div>
+    <h1>Ready-Made SaaS Branding & UX Packs for Startups</h1>
+    <p>
+      Finally, there is an easier way for SaaS startups to implement a fresh, consistent brand and UX.
+      Instead of hiring an agency, you can launch with ready-made SaaS branding and UX packs today and
+      save the big custom project for later.
+    </p>
     
-      <ul class="nav-bar" aria-label="Main">
-        </ul>
-    
-      <a class="btn-contact cta-modal-trigger" 
-      href="#" 
-      data-form-url="https://form.fillout.com/t/wSoN83phHnus"
-      data-title="Contact Us">
-      Contact
-      </a>      
+    <div class="ctas">
+      <a class="btn btn-primary" href="https://alundsvagen.github.io/ux/pricing.html">Start Now (Get Pricing)</a>
+      <button class="btn btn-outline cta-modal-trigger" 
+              data-form-url="https://form.fillout.com/t/wSoN83phHnus"
+              data-title="Send a Message">
+        Get in Touch
+      </button>
+    </div>
 
-      <button class="hamburger" id="openPanel" aria-label="Open menu"><span></span></button>
-    </header>
-    
-    <nav class="panel" id="panel" aria-label="Mobile">
-      <button class="close" id="closePanel" aria-label="Close">×</button>
-      <div class="panel-logo"><a href="/">take away<br/>studio</a></div>
-
-      <h4>Product</h4>
-      <a href="https://alundsvagen.github.io/ux/brands.html">Brands</a>
-      <a href="https://alundsvagen.github.io/ux/ux.html">UX packs</a>
-
-      <h4>Philosophy</h4>
-      <a href="https://alundsvagen.github.io/ux/About.html">About</a>
-      <a href="https://alundsvagen.github.io/ux/services.html">Services</a>
-
-      <h4>Other</h4>
-      <a href="https://alundsvagen.github.io/ux/custom.html">Custom</a>
-      <a href="https://alundsvagen.github.io/ux/pricing.html">Pricing</a>
-      <a href="#" class="cta-modal-trigger"
-        data-form-url="https://form.fillout.com/t/wSoN83phHnus"
-        data-title="Contact Us"
-        style="background: var(--blue); color: white; margin-top: 15px;">
-        Contact Us
-      </a>
-    </nav>
-
-    <section class="hero">
-      <h1>Ready-Made SaaS Branding & UX Packs for Startups</h1>
-      <p>
-        Finally, there is an easier way for SaaS startups to implement a fresh, consistent brand and UX.
-        Instead of hiring an agency, you can launch with ready-made SaaS branding and UX packs today and
-        save the big custom project for later.
-      </p>
-      
-      <div class="ctas">
-        <a class="btn btn-primary" href="https://alundsvagen.github.io/ux/brands.html">Brands</a>
-        <button class="btn btn-outline cta-modal-trigger" 
-                data-form-url="https://form.fillout.com/t/4ZUPhq7GzKus"
-                data-title="Test a Mini Pack">
-          Test a Mini Pack
-        </button>
-      </div>
-
-      <div class="media-wrap">
-        <img src="landing2.gif" alt="Ready-made SaaS branding and UX packs landing page demo" class="media" />
-      </div>
-    </section>
+    <div class="media-wrap">
+      <img src="landing2.gif" alt="Ready-made SaaS branding and UX packs landing page demo" class="media" />
+    </div>
   </div>
+</section>
 
 <section class="why-section">
   <div class="wrap">
@@ -359,7 +626,7 @@ header .nav-bar, header .btn-contact{ display:none; }
         </div>
       </div>
     </div>
-    
+
     <div class="why-grid">
       <div class="why-text">
         <h3>Why buy a ready-made SaaS brand pack?</h3>
@@ -379,10 +646,174 @@ header .nav-bar, header .btn-contact{ display:none; }
 </section>
 
 <section class="philo-section">
-  </section>
+  <div class="wrap">
+    <div class="philo-top">
+      <span class="philo-chip-outline">Background</span>
+      <h2 class="philo-title">Our SaaS branding philosophy, UX packs &amp; story</h2>
+    </div>
+
+    <div class="philo-grid">
+
+      <a class="philo-card" href="https://alundsvagen.github.io/ux/ux.html">
+        <img src="dark1.png" alt="SaaS UX pack interface for fast implementation" class="philo-img" />
+        <span class="philo-chip philo-chip--small">UX Packs</span>
+        <div class="philo-caption"><h3>Fast Implementation</h3></div>
+      </a>
+
+      <a class="philo-card" href="https://alundsvagen.github.io/ux/brands.html">
+        <img src="dark2.png" alt="SaaS brand design pack showcasing quality design work" class="philo-img" />
+        <span class="philo-chip philo-chip--small">Brand Packs</span>
+        <div class="philo-caption"><h3>Quality Design Work</h3></div>
+      </a>
+
+      <a class="philo-card" href="https://alundsvagen.github.io/ux/About.html">
+        <img src="dark3.png" alt="Custom SaaS branding and UX design option" class="philo-img" />
+        <span class="philo-chip philo-chip--wide philo-chip--small">About</span>
+        <div class="philo-caption"><h3>Customization if you need it.</h3></div>
+      </a>
+    </div>
+  </div>
+</section>
 
 <section class="brandkits-section">
-  </section>
+  <div class="wrap">
 
+    <div class="brandkits-top">
+      <div class="brandkits-logo-frame">
+        <div class="bk-logo">
+          <div class="bk-ring bk-outer"></div>
+          <div class="bk-ring bk-middle"></div>
+          <div class="bk-ring bk-inner"></div>
+          <div class="bk-text">take away<br>studio</div>
+        </div>
+      </div>
+
+      <div class="brandkits-header">
+        <h2>Scandinavian SaaS branding &amp; UX design at our core.</h2>
+        <p>Browse our kits: branding, ux &amp; ui at your fingertips.</p>
+      </div>
+    </div>
+
+    <div class="brandkits-grid">
+      <a href="https://alundsvagen.github.io/ux/brands.html" class="brandkits-card">
+        <span class="pill">Simple</span>
+        <h3>SaaS user<br>experience packs</h3>
+        <p>Start with ready-made SaaS UX packs for checkout flows and analytics dashboards, with more patterns coming soon.</p>
+      </a>
+
+      <a href="https://alundsvagen.github.io/ux/ux.html" class="brandkits-card">
+        <span class="pill">Robust</span>
+        <h3>SaaS UI<br>components</h3>
+        <p>Our ready-made SaaS UI components come with HTML and clear instructions so your team can implement them quickly.</p>
+      </a>
+
+      <a href="https://alundsvagen.github.io/ux/ux.html" class="brandkits-card">
+        <span class="pill pill-wide">Consistent</span>
+        <h3>UI<br>Components</h3>
+        <p>Our designs come with HTML &amp; instructions for you to easily implement them yourself.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="sticky-cta-footer">
+  <button class="btn btn-primary cta-modal-trigger" 
+          data-form-url="https://form.fillout.com/t/wSoN83phHnus"
+          data-title="Send a Message">
+    Contact Us Today
+  </button>
+</div>
+
+<script>
+  // MODAL SCRIPT FOR CTAS
+  document.addEventListener('DOMContentLoaded', () => {
+    const modalOverlay = document.getElementById('cta-modal-overlay');
+    const iframe = document.getElementById('modal-iframe');
+    const modalTitle = document.getElementById('modal-title');
+    const closeBtn = document.getElementById('modal-close-btn');
+    const triggers = document.querySelectorAll('.cta-modal-trigger');
+
+    // Desktop Dropdown Logic
+    const ddTriggers = document.querySelectorAll('[data-dd]');
+    ddTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            const menuId = trigger.getAttribute('data-dd');
+            const menu = document.getElementById('dd-' + menuId);
+            if (menu) {
+                // Close all other menus
+                document.querySelectorAll('.menu.open').forEach(openMenu => {
+                    if (openMenu !== menu) {
+                        openMenu.classList.remove('open');
+                    }
+                });
+                // Toggle the clicked menu
+                menu.classList.toggle('open');
+                e.preventDefault();
+            }
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-bar')) {
+            document.querySelectorAll('.menu.open').forEach(openMenu => {
+                openMenu.classList.remove('open');
+            });
+        }
+    });
+
+    if (!modalOverlay || !iframe || !modalTitle || !closeBtn || triggers.length === 0) return;
+
+    function openModal(url, title) {
+      modalTitle.textContent = title;
+      iframe.src = url;
+      modalOverlay.classList.add('is-open');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      modalOverlay.focus();
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('is-open');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      iframe.src = ''; 
+      document.body.style.overflow = '';
+    }
+
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = trigger.getAttribute('data-form-url');
+        const title = trigger.getAttribute('data-title') || 'Form';
+        // Close mobile panel if open before opening modal
+        panel?.classList.remove('open');
+        if (url) openModal(url, title);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+  });
+
+  // Mobile nav script 
+  const openPanel = document.getElementById('openPanel');
+  const closePanel = document.getElementById('closePanel');
+  const panel = document.getElementById('panel');
+  openPanel?.addEventListener('click', ()=> panel?.classList.add('open'));
+  closePanel?.addEventListener('click', (e)=>{
+    e.preventDefault();
+    panel?.classList.remove('open');
+  });
+</script>
 </body>
 </html>
